@@ -1,0 +1,26 @@
+export const themeNames = [
+  'CAMPFIRE',
+  'CAMPFIRE',
+  'CAMPFIRE',
+  'CAMPFIRE Community',
+  'CAMPFIRE Community',
+  'CAMPFIRE Creation',
+  'CAMPFIRE Owners',
+  'Gojo',
+  'CAMPFIRE ACADEMY',
+  'tomoshibi',
+  'tomoshibi',
+  'hibana',
+  'polca',
+  'FAAVO',
+  'Yuruwa*',
+  'GoodMorning',
+  'CAMPFIRE Angels',
+  'machi-ya',
+  'Corporate',
+  'BOOSTER',
+  'BOOSTER STUDIO',
+  'EXODUS',
+]
+
+export const themeCount = themeNames.length
