@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>FIRE LINER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="なぞって消そう！シンプルなパズルゲームです！"
+/>
+<meta name="keywords" content="FIRE LINER, パズルゲーム, PUZZLE, パズル" />
+<link rel="canonical" href="https://hasegawa-campfire.github.io/fire-liner/" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:url"
+  content="https://hasegawa-campfire.github.io/fire-liner/"
+/>
+<meta property="og:title" content="FIRE LINER" />
+<meta property="og:site_name" content="FIRE LINER" />
+<meta
+  property="og:description"
+  content="なぞって消そう！シンプルなパズルゲームです！"
+/>
+<meta property="og:image" content="./ogp.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@hsgwkt" />
+<link rel="icon" href="./favicon.png" type="image/png" />
+<script type="importmap">
+  {
+    "imports": {
+      "@/": "./",
+      "@local_modules/": "./local_modules/",
+      "@env": "./env.local.js",
+      "firebase/app": "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js",
+      "firebase/analytics": "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js",
+      "firebase/firestore/lite": "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-lite.js"
+    }
+  }
+</script>
+<style>
+  [hidden] {
+    display: none !important;
+  }
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior-y: none;
+    user-select: none;
+    overflow: hidden;
+    background-color: #454446;
+  }
+  #screen {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    cursor: inherit;
+  }
+  #loading {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    object-fit: contain;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  #screen:not([hidden]) ~ #loading {
+    display: none;
+  }
+</style>
+
+<body>
+  <canvas id="screen" hidden></canvas>
+  <svg
+    id="loading"
+    width="144"
+    height="160"
+    viewBox="0 0 144 160"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="144" height="160" fill="#333" />
+    <text
+      x="50%"
+      y="50%"
+      dominant-baseline="middle"
+      text-anchor="middle"
+      fill="#ddd"
+      font-size="4"
+      font-family="sans-serif"
+      font-weight="100"
+    >
+      LOADING...
+    </text>
+  </svg>
+  <script type="module" src="./main.js"></script>
+</body>

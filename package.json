@@ -1,0 +1,29 @@
+{
+  "name": "fire-liner",
+  "version": "0.1.0",
+  "source": "src/index.html",
+  "license": "MIT",
+  "scripts": {
+    "assets:build": "node src/local_modules/asset/build.mjs src/assets",
+    "assets:clear": "node src/local_modules/asset/clear.mjs",
+    "serve": "serve -L src",
+    "prebuild": "rm -rf dist && npm run assets:build",
+    "build": "parcel build --no-source-maps --public-url https://hasegawa-campfire.github.io/fire-liner/",
+    "postbuild": "npm run assets:clear"
+  },
+  "dependencies": {
+    "firebase": "^9.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "parcel": "^2.8.1",
+    "process": "^0.11.10",
+    "serve": "^14.1.2"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "alias": {
+    "@/*": "./src/$1",
+    "@local_modules/*": "./src/local_modules/$1",
+    "@env": "./src/env.js"
+  }
+}
