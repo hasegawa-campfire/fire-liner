@@ -1,11 +1,8 @@
-import { Sprite } from '@local_modules/sprite.js'
 import { Tween } from '@local_modules/tween.js'
 import { g, pref, screen } from '@/r.js'
 import { Button } from '@/ui/button.js'
 
 export const height = 16
-
-const sprNew = Sprite.load('icon/new.png')
 
 export class ListItem {
   index
@@ -27,16 +24,8 @@ export class ListItem {
   }
 
   update() {
+    this.button.new = !pref.tips[this.index]
     this.button.update()
-
-    if (!pref.tips[this.index] && !this.button.lock) {
-      g.drawImage(
-        sprNew,
-        this.button.x - 1,
-        this.button.y + this.twNew.next().value
-      )
-    }
-
     this.isClick = this.button.isClick
   }
 }

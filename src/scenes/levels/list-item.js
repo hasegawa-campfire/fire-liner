@@ -6,7 +6,6 @@ import { getLevelScore, isScorable } from '@/helper.js'
 
 const sprNum = Sprite.load('levels/number.png')
 const sprStar = Sprite.load('levels/star.png')
-const sprNew = Sprite.load('icon/new.png')
 const iconSize = 8
 
 export const width = 32
@@ -66,18 +65,11 @@ export class ListItem {
     this.star = star
     this.button = new Button(8 + x * width, 8 + y * height, width, height)
     this.button.lock = lock
+    this.button.new = star === 0
   }
 
   update() {
     this.button.update(() => this.updateContent())
-
-    if (!this.button.lock && this.star === 0) {
-      g.drawImage(
-        sprNew,
-        this.button.x - 1,
-        this.button.y + this.twNew.next().value
-      )
-    }
 
     if (this.button.isClick) {
       const puzzle = true

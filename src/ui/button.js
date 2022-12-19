@@ -6,6 +6,7 @@ import { logEvent } from '@/data/server.js'
 
 const spr = Sprite.load('button.png')
 const sprLock = Sprite.load('icon/lock.png')
+const sprNew = Sprite.load('icon/new.png')
 
 const shakeOffsets = [
   [-1, -1],
@@ -29,6 +30,8 @@ export class Button {
   isClick = false
   twShake = Tween.from(0).to(3, 12, steps(4))
   lockText = ''
+  new = false
+  twNew = Tween.from(0).wait(30).to(1).wait(30).loop().start()
 
   /**
    * @param {number} x
@@ -164,5 +167,9 @@ export class Button {
     }
 
     g.restore()
+
+    if (!this.lock && this.new) {
+      g.drawImage(sprNew, this.x - 1, this.y + this.twNew.next().value)
+    }
   }
 }

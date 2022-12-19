@@ -1,3 +1,4 @@
+import { times } from '@/local_modules/util/index.js'
 import { TipsDialog } from '@/dialogs/tips-dialog.js'
 import tipsDataList from '@/data/tips.js'
 import { bgm, g, pref } from '@/r.js'
@@ -8,6 +9,22 @@ import { Status } from './status.js'
 
 export { TipsDialog }
 
+function getLocks() {
+  const locks = times(9).map(() => false)
+  locks[1] = !pref.tips[1]
+  locks[2] = !pref.tips[2]
+  locks[3] = getLevelStar(12) <= 0
+  locks[4] = !pref.tips[4]
+  locks[5] = !pref.tips[4]
+  locks[6] = !pref.tips[4]
+  if (!pref.tips[8]) locks.pop()
+  return locks
+}
+
+export function existNewTips() {
+  return getLocks().some((lock, i) => !lock && !pref.tips[i])
+}
+
 export class SceneTips {
   bgm = bgm.menu
   list
@@ -15,17 +32,11 @@ export class SceneTips {
   dialog = new TipsDialog()
 
   constructor() {
-    const tips = tipsDataList.map((t) => ({ title: t.title, lock: true }))
-    tips[0].lock = false
-    tips[1].lock = !pref.tips[1]
-    tips[2].lock = !pref.tips[2]
-    tips[3].lock = getLevelStar(12) <= 0
-    tips[4].lock = !pref.tips[4]
-    tips[5].lock = !pref.tips[4]
-    tips[6].lock = !pref.tips[4]
-    tips[7].lock = false
-    tips[8].lock = false
-    if (!pref.tips[8]) tips.pop()
+    const tips = getLocks().map((lock, i) => {
+      const title = tipsDataList[i].title
+      return { title, lock }
+    })
+
     this.list = new List(tips)
 
     logEvent('tips_view')

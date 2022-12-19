@@ -4,9 +4,10 @@ import { outSine, Tween } from '@local_modules/tween.js'
 import { g, screen, color, store, defaultName, pref, bgm } from '@/r.js'
 import { Button } from '@/ui/button.js'
 import { ReplayDialog } from '@/dialogs/replay-dialog.js'
-import { getUnlockLevel, setAudioMute } from '@/helper.js'
+import { getLevelStar, getUnlockLevel, setAudioMute } from '@/helper.js'
 import { shareUrl, getReplayId, deleteReplayId } from '@/data/urls.js'
 import { getMeRank, getMe, logEvent } from '@/data/server.js'
+import { existNewTips } from '@/scenes/tips/index.js'
 import { Logo } from './logo.js'
 import { Item } from './item.js'
 
@@ -50,6 +51,9 @@ export class SceneTitle {
       this.items.push(new Item({ x: 0 - x, y: 0 }))
       this.items.push(new Item({ x: screen.width + x, y: y1 - 10 }))
     }
+
+    this.btnScore.new = !pref.tips[4]
+    this.btnTips.new = existNewTips()
 
     logEvent('title_view')
   }
