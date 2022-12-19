@@ -74,16 +74,18 @@ export class Button {
       this.isClick = this.down && upChange
       this.down = pointer.isDown && (this.down || downChange)
       downChange && se.buttonDown.play()
-      upChange && se.buttonUp.play()
+      this.isClick && se.buttonUp.play()
     } else if (!this.twShake.running && downChange) {
       this.twShake.start()
       se.lock.play()
     }
 
     if (!this.disabled && !this.lock && this.linkUrl) {
-      pointer.onClick((pos) => {
-        const ptr = matrix.transformPos(pos)
-        if (inRect(this, ptr)) {
+      pointer.onClick((posUp, downPos) => {
+        const ptrUp = matrix.transformPos(posUp)
+        const ptrDown = matrix.transformPos(downPos)
+
+        if (inRect(this, ptrUp) && inRect(this, ptrDown)) {
           window.open(this.linkUrl)
           logEvent('button_link_open', { url: this.linkUrl })
         }

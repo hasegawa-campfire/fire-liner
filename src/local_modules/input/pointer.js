@@ -1,5 +1,5 @@
 /**
- * @typedef {(pos: Pos) => void} ClickListener
+ * @typedef {(pos: Pos, startPos: Pos) => void} ClickListener
  */
 
 export class InputPointer {
@@ -7,6 +7,7 @@ export class InputPointer {
   #resolution
   #realDown = false
   #realPos = { x: 0, y: 0 }
+  #realDownPos = { x: 0, y: 0 }
   #realClickListeners = /** @type {ClickListener[]} */ ([])
   #realWheel = 0
   #down = false
@@ -42,6 +43,8 @@ export class InputPointer {
   #onDown(e) {
     this.#updateRealPos(e)
     this.#realDown = true
+    this.#realDownPos.x = this.#realPos.x
+    this.#realDownPos.y = this.#realPos.y
   }
 
   /**
@@ -49,7 +52,7 @@ export class InputPointer {
    */
   #onClick(e) {
     for (const listener of this.#realClickListeners) {
-      listener(this.#realPos)
+      listener(this.#realPos, this.#realDownPos)
       this.#realClicked = true
     }
   }
